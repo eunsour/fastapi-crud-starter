@@ -46,6 +46,11 @@ class ItemRequest(BaseModel):
     name: str = Query(..., max_length=50)
     price: float
 
+
+@app.get("/")
+def root():
+    return {"message": "Hello World"}
+
 # GetItemByName
 @app.get("/item")
 def get_item(id: int = None, name: str = Query(None, max_length=50), db: Session = Depends(session)):

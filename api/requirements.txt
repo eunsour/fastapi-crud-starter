@@ -1,2 +1,7 @@
-sqlalchemy==1.4.31
+alembic==1.4.3
+fastapi==0.61.1
 mysqlclient==2.1.0
+pytest==6.1.2
+sqlalchemy==1.4.31
+sqlalchemy_utils==0.36.8
+uvicorn==0.12.2
