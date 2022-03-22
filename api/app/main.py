@@ -51,7 +51,6 @@ class ItemRequest(BaseModel):
 def root():
     return {"message": "Hello World"}
 
-# GetItemByName
 @app.get("/item")
 def get_item(id: int = None, name: str = Query(None, max_length=50), db: Session = Depends(session)):
     if id is not None:
@@ -63,7 +62,6 @@ def get_item(id: int = None, name: str = Query(None, max_length=50), db: Session
     response_body = jsonable_encoder({"list": result_set})
     return JSONResponse(status_code=status.HTTP_200_OK, content=response_body)
 
-# CreateItem
 @app.post("/item")
 def create_item(request: ItemRequest, db: Session = Depends(session)):
     item = Item(
@@ -75,7 +73,6 @@ def create_item(request: ItemRequest, db: Session = Depends(session)):
     response_body = jsonable_encoder({"item_id" : item.item_id})
     return JSONResponse(status_code=status.HTTP_200_OK, content=response_body)
 
-# UpdateItem
 @app.put("/item/{id}")
 def update_item(id: int, request: ItemRequest, db: Session = Depends(session)):
     item = db.query(Item).filter(Item.item_id == id).first()
@@ -86,7 +83,6 @@ def update_item(id: int, request: ItemRequest, db: Session = Depends(session)):
     db.commit()
     return JSONResponse(status_code=status.HTTP_200_OK)
 
-# DeleteItem
 @app.delete("/item/{id}")
 def delete_item(id: int, db: Session = Depends(session)):
     db.query(Item).filter(Item.item_id == id).delete()
