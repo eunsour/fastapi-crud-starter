@@ -1,22 +1,23 @@
-import os
+from os import environ
+
 from fastapi import FastAPI, Depends, Query, status
 from fastapi.responses import JSONResponse
 from fastapi.encoders import jsonable_encoder
 from pydantic import BaseModel
+
 from sqlalchemy import Column, TIMESTAMP, Integer, String, create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.schema import FetchedValue
 
-
 app = FastAPI()
 
 SQLALCHEMY_DATABASE_URI = 'mysql://{}:{}@{}:{}/{}'.format(
-        os.environ.get("DB_USER"), 
-        os.environ.get("DB_PASSWORD"),
-        os.environ.get("DB_HOST"), 
-        os.environ.get("DB_PORT"), 
-        os.environ.get("DB_NAME")
+        environ.get("DB_USER"), 
+        environ.get("DB_PASSWORD"),
+        environ.get("DB_HOST"), 
+        environ.get("DB_PORT"), 
+        environ.get("DB_NAME")
     )
 
 engine = create_engine(SQLALCHEMY_DATABASE_URI)
