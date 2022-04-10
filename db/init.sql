@@ -1,6 +1,7 @@
 USE sample_db;
 
 DROP TABLE IF EXISTS item;
+
 CREATE TABLE item
 (
   item_id SERIAL PRIMARY KEY,
